@@ -1,0 +1,28 @@
+body {
+  background: #f2f2f2;
+  font-family: "arial";
+  text-align: center; }
+
+h1 {
+  padding: 10px;
+  align: middle; }
+
+p {
+  color: #0000FF; }
+
+button {
+  background-color: #4CAF50;
+  /* Green */
+  border: none;
+  border-radius: 12px;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px; }
+
+table {
+  display: inline-block; }
+
+/*# sourceMappingURL=application.css.map */
