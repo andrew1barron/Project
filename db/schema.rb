@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160127173247) do
+ActiveRecord::Schema.define(version: 20160202113718) do
 
   create_table "articles", force: :cascade do |t|
     t.string   "title"
@@ -24,8 +24,9 @@ ActiveRecord::Schema.define(version: 20160127173247) do
     t.string   "commenter"
     t.text     "body"
     t.integer  "article_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.integer  "PostReference"
   end
 
   add_index "comments", ["article_id"], name: "index_comments_on_article_id"
@@ -49,6 +50,16 @@ ActiveRecord::Schema.define(version: 20160127173247) do
   end
 
   add_index "posts", ["user_id"], name: "index_posts_on_user_id"
+
+  create_table "replies", force: :cascade do |t|
+    t.string   "commenter"
+    t.text     "body"
+    t.integer  "post_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "replies", ["post_id"], name: "index_replies_on_post_id"
 
   create_table "routes", force: :cascade do |t|
     t.datetime "created_at", null: false
