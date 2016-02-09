@@ -1,5 +1,5 @@
 body {
-  background: #f2f2f2;
+  background-image: url("http://d5qsyj6vaeh11.cloudfront.net/images/destinations/backgrounds/314_bg_mournes.jpg");
   font-family: "arial";
   text-align: center; }
 
@@ -8,7 +8,7 @@ h1 {
   align: middle; }
 
 p {
-  color: #0000FF; }
+  color: black; }
 
 button {
   background-color: #4CAF50;
