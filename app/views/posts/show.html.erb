@@ -15,17 +15,27 @@
 
 <h2>Replies</h2>
 <% @post.replies.each do |reply| %>
-  <p>
+<tr>
+  <td>
     <strong>Commenter:</strong>
     <%= reply.commenter %>
-  </p>
+  </td>
  
-  <p>
+  <td>
     <strong>Comment:</strong>
     <%= reply.body %>
-  </p>
-<% end %>
+  </td>
 
+  <!-- If statement below allows the owner of the post to delete any comments on the post 
+      need to change to also allow the commenter the option of deleting their comment on a post -->
+  <td>
+    <% if current_user == @post.user %>
+      <%= link_to 'Destroy Comment', [reply.post, reply], method: :delete, data: { confirm: 'Are you sure?'} %>
+    <% end %>
+  </td>
+  <br>
+</tr>
+<% end %>
 
 <h2>Add a Reply!</h2>
 <%= form_for([@post, @post.replies.build]) do |f| %>
@@ -40,6 +50,6 @@
   <p>
     <%= f.submit %>
   </p>
-<% end %>
+<% end %> 
 <%= link_to 'Edit', edit_post_path(@post) %> |
 <%= link_to 'Back', posts_path %>
