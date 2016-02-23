@@ -1,4 +1,5 @@
-<h1>Listing Posts</h1>
+<h1>Posts</h1>
+<h3>In order to create a post, please log in or sign up!</h3>
 <table>
   <thead>
     <tr>
@@ -15,7 +16,9 @@
       <td><%= post.user %></td>
       <td><%= post.title %></td>
       <td><%= post.content %></td>
-      <td><%= link_to 'Show', post %></td>
+      <!-- any user can view a post, signed in or not -->
+      <td><%= link_to 'Show', post %></td> 
+      <!-- following if-statements allow a signed in user to edit or delete posts they have made -->
       <td><% if current_user && post.user == current_user %>
         <%= link_to 'Edit', edit_post_path(post) %><% end %>
       </td>
@@ -27,5 +30,8 @@
   </tbody>
 </table>
 <br>
-<% if current_user %> <%= link_to 'New Post', new_post_path %>
+<br>
+<% if current_user %> 
+<p><button type="button"><%= link_to 'New Post', new_post_path %></button></p>
+<p><button type="button"><%= link_to 'Home', root_path %></button></p>
 <% end %>

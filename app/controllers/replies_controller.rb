@@ -2,15 +2,19 @@ class RepliesController < ApplicationController
 	before_action :authorize
 	def create
 		@post = Post.find(params[:post_id])
-		#@replier = User.find(params[:user_id])
 		@reply = @post.replies.create(reply_params)
-		redirect_to post_path(@post)
+        @commenter = current_user
+        if @reply.save
+            redirect_to @post, notice: 'Reply was successfully created!' 
+        else
+            render :new
+        end
 	end 
 	def destroy
 		@post = Post.find(params[:post_id])
     	@reply = @post.replies.find(params[:id])
     	@reply.destroy
-    	redirect_to post_path(@post)
+    	redirect_to @post, notice: "Comment deleted!"
     end 
 
 	private

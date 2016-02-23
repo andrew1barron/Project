@@ -18,33 +18,42 @@
 <tr>
   <td>
     <strong>Commenter:</strong>
-    <%= reply.commenter %>
+    <%= reply.commenter %> 
   </td>
  
   <td>
     <strong>Comment:</strong>
     <%= reply.body %>
   </td>
-
-  <!-- If statement below allows the owner of the post to delete any comments on the post 
-      need to change to also allow the commenter the option of deleting their comment on a post -->
+  <!-- above is the layout for the page - post and related comments. -->
+  <!-- If statement below allows the owner of the post to delete any comments on the post -->
+  <!-- need to change to also allow the commenter the option of deleting their comment on a post -->
   <td>
-    <% if current_user == @post.user %>
-      <%= link_to 'Destroy Comment', [reply.post, reply], method: :delete, data: { confirm: 'Are you sure?'} %>
-    <% end %>
+    <% if current_user == @post.user  %>
+      <%= link_to 'Remove Comment', [reply.post, reply], method: :delete, data: { confirm: 'Are you sure?'} %>
+    <% end %> 
+    <!--<% if reply.commenter == current_user %>
+          <%= link_to 'Destroy Comment', [reply.post, reply], method: :delete, data: { confirm: 'Are you sure?'} %>
+    <% end %> -->
   </td>
   <br>
 </tr>
 <% end %>
 
+<!-- the following code allows users to post a reply - functionality and layout for this --> 
 <h2>Add a Reply!</h2>
 <%= form_for([@post, @post.replies.build]) do |f| %>
+<p>
   <p>
-    <%= f.label :commenter %><br>
+    <%= f.label :commenter %>
+    <br>
     <%= f.text_field :commenter %>
+    <br> 
+    <!-- this is taking in the commenter - need to get this to take in the current user as the commenter -->
   </p>
   <p>
-    <%= f.label :body %><br>
+    <%= f.label :body %>
+    <br>
     <%= f.text_area :body %>
   </p>
   <p>
