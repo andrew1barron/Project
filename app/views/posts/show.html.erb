@@ -29,12 +29,12 @@
   <!-- If statement below allows the owner of the post to delete any comments on the post -->
   <!-- need to change to also allow the commenter the option of deleting their comment on a post -->
   <td>
-    <% if current_user == @post.user  %>
+    <% if current_user == @post.user %>
       <%= link_to 'Remove Comment', [reply.post, reply], method: :delete, data: { confirm: 'Are you sure?'} %>
     <% end %> 
-    <!--<% if reply.commenter == current_user %>
-          <%= link_to 'Destroy Comment', [reply.post, reply], method: :delete, data: { confirm: 'Are you sure?'} %>
-    <% end %> -->
+    <% if current_user ==  reply.user %> 
+      <%= link_to 'Remove Comment', [reply.post, reply], method: :delete, data: { confirm: 'Are you sure?'} %>
+    <% end %> 
   </td>
   <br>
 </tr>
@@ -43,18 +43,19 @@
 <!-- the following code allows users to post a reply - functionality and layout for this --> 
 <h2>Add a Reply!</h2>
 <%= form_for([@post, @post.replies.build]) do |f| %>
+<%= f.hidden_field(:user_id, :value => current_user.id) %> <!-- this takes in the user_id of the person writing the reply --> 
 <p>
   <p>
     <%= f.label :commenter %>
     <br>
-    <%= f.text_field :commenter %>
+    <%= f.text_field :commenter, :placeholder => "Name" %>
     <br> 
     <!-- this is taking in the commenter - need to get this to take in the current user as the commenter -->
   </p>
   <p>
     <%= f.label :body %>
     <br>
-    <%= f.text_area :body %>
+    <%= f.text_area :body, :placeholder => "Comment" %>
   </p>
   <p>
     <%= f.submit %>

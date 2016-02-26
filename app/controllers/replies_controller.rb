@@ -2,8 +2,11 @@ class RepliesController < ApplicationController
 	before_action :authorize
 	def create
 		@post = Post.find(params[:post_id])
+        @replyUserID = current_user.id
 		@reply = @post.replies.create(reply_params)
-        @commenter = current_user
+        puts '////'
+        puts @reply.inspect
+        puts '////'
         if @reply.save
             redirect_to @post, notice: 'Reply was successfully created!' 
         else
@@ -19,7 +22,7 @@ class RepliesController < ApplicationController
 
 	private
 	def reply_params
-		params.require(:reply).permit(:commenter, :body)
+		params.require(:reply).permit(:commenter, :body, :user_id)
 	end 
 
 	def authorize

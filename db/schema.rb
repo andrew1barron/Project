@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160202113718) do
+ActiveRecord::Schema.define(version: 20160224143924) do
 
   create_table "articles", force: :cascade do |t|
     t.string   "title"
@@ -57,9 +57,11 @@ ActiveRecord::Schema.define(version: 20160202113718) do
     t.integer  "post_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "user_id"
   end
 
   add_index "replies", ["post_id"], name: "index_replies_on_post_id"
+  add_index "replies", ["user_id"], name: "index_replies_on_user_id"
 
   create_table "routes", force: :cascade do |t|
     t.datetime "created_at", null: false

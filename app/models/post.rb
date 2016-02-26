@@ -1,5 +1,5 @@
 class Post < ActiveRecord::Base
-  has_many :replies
+  has_many :replies, dependent: :destroy
   belongs_to :user
 
   validates :title,
