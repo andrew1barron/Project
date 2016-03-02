@@ -13,53 +13,64 @@
   <%= @post.content %>
 </p>
 
-<h2>Replies</h2>
-<% @post.replies.each do |reply| %>
-<tr>
-  <td>
-    <strong>Commenter:</strong>
-    <%= reply.commenter %> 
-  </td>
- 
-  <td>
-    <strong>Comment:</strong>
-    <%= reply.body %>
-  </td>
-  <!-- above is the layout for the page - post and related comments. -->
-  <!-- If statement below allows the owner of the post to delete any comments on the post -->
-  <!-- need to change to also allow the commenter the option of deleting their comment on a post -->
-  <td>
-    <% if current_user == @post.user %>
-      <%= link_to 'Remove Comment', [reply.post, reply], method: :delete, data: { confirm: 'Are you sure?'} %>
-    <% end %> 
-    <% if current_user ==  reply.user %> 
-      <%= link_to 'Remove Comment', [reply.post, reply], method: :delete, data: { confirm: 'Are you sure?'} %>
-    <% end %> 
-  </td>
-  <br>
-</tr>
+<% if current_user != true %>
+  <h2>Please sign in to comment!</h2>
 <% end %>
 
-<!-- the following code allows users to post a reply - functionality and layout for this --> 
-<h2>Add a Reply!</h2>
-<%= form_for([@post, @post.replies.build]) do |f| %>
-<%= f.hidden_field(:user_id, :value => current_user.id) %> <!-- this takes in the user_id of the person writing the reply --> 
-<p>
-  <p>
-    <%= f.label :commenter %>
+<h2>Replies</h2>
+  <% @post.replies.each do |reply| %>
+  <tr>
+    <td>
+      <strong>Commenter:</strong>
+        <%= reply.commenter %> 
+    </td>
+    <td>
+      <strong>Comment:</strong>
+      <%= reply.body %>
+    </td>
     <br>
-    <%= f.text_field :commenter, :placeholder => "Name" %>
-    <br> 
-    <!-- this is taking in the commenter - need to get this to take in the current user as the commenter -->
-  </p>
-  <p>
-    <%= f.label :body %>
+    <!-- above is the layout for the page - post and related comments. -->
+    <!-- If statement below allows the owner of the post to delete any comments on the post -->
+    <!-- need to change to also allow the commenter the option of deleting their comment on a post -->
+    <td>
+      <% if current_user %>
+      <% if current_user == @post.user %>
+        <%= link_to 'Remove Comment', [reply.post, reply], method: :delete, data: { confirm: 'Are you sure?'} %>
+      <% end %> 
+      <% if current_user ==  reply.user %> 
+        <%= link_to 'Remove Comment', [reply.post, reply], method: :delete, data: { confirm: 'Are you sure?'} %>
+      <% end %> 
+    </td>
     <br>
-    <%= f.text_area :body, :placeholder => "Comment" %>
-  </p>
-  <p>
-    <%= f.submit %>
-  </p>
-<% end %> 
+  </tr>
+<% end %>
+<% end %>
+
+<!-- the following code allows users to post a reply - functionality and layout for this -->
+<% if current_user %>
+  <h2>Add a Reply!</h2>
+    <%= form_for([@post, @post.replies.build]) do |f| %>
+    <%= f.hidden_field(:user_id, :value => current_user.id) %> 
+    <!-- this takes in the user_id of the person writing the reply --> 
+    <p>
+      <p>
+        <%= f.label :commenter %>
+        <br>
+        <%= f.text_field :commenter, :placeholder => "Name" %>
+        <br> 
+      </p>
+      <p>
+        <%= f.label :body %>
+        <br>
+        <%= f.text_area :body, :placeholder => "Comment" %>
+      </p>
+    <p>
+      <%= f.submit %>
+    </p>
+  <% end %> 
+<% end %>
+
+
+
 <%= link_to 'Edit', edit_post_path(@post) %> |
 <%= link_to 'Back', posts_path %>
