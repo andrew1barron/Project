@@ -4,6 +4,7 @@ class RepliesController < ApplicationController
 		@post = Post.find(params[:post_id])
         @replyUserID = current_user.id
 		@reply = @post.replies.create(reply_params)
+        # puts line of code is here for checking if the user_id was being taken in 
         puts '////'
         puts @reply.inspect
         puts '////'
@@ -28,14 +29,6 @@ class RepliesController < ApplicationController
 	def authorize
         if current_user.nil?
         redirect_to login_url, alert: "Please Log in or Sign Up to comment!"
-        #else
-        #if @post && @post.user != current_user
-        #redirect_to root_path, alert: "Not authorized! Only #{@post.user} has access to this post."
-        #end
       	end
     end 
-
-    #def replier
-    #	@replier = current_user.find(params[:user_id])
-    #end 
 end
