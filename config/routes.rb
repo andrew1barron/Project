@@ -26,7 +26,7 @@ Rails.application.routes.draw do
 
   resources :routes do
     collection do
-      get :leinster 
+      get :leinster
       get :munster
       get :connacht
       get :ulster
