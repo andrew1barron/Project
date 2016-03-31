@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   resources :posts do
     resources :replies
   end 
+ 
   resources :sessions, only: [:new, :create, :destroy]
   get 'signup', to: 'users#new', as: 'signup'
   get 'login', to: 'sessions#new', as: 'login'
