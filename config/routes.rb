@@ -9,8 +9,8 @@ Rails.application.routes.draw do
   resources :sessions, only: [:new, :create, :destroy]
 
 
-  get '2010', to: 'home#2010', as: '2010'
-  
+  get 'LeinsterYear', to: 'home#LeinsterYear', as: 'LeinsterYear'
+
   get 'signup', to: 'users#new', as: 'signup'
   get 'login', to: 'sessions#new', as: 'login'
   get 'logout', to: 'sessions#destroy', as: 'logout'
