@@ -28,11 +28,10 @@ Rails.application.routes.draw do
   resources :routes do
     collection do
       get :leinster
-      get :L2010
       get :munster
       get :connacht
       get :ulster
-      get :Leinster2010
+      get 'Leinster2010', to: 'routes#Leinster2010', as: 'L2010'
     end
   end
 
