@@ -37,6 +37,7 @@ Rails.application.routes.draw do
       get :munster
       get :connacht
       get :ulster
+      get :Leinster2010
     end
   end 
   # The priority is based upon order of creation: first created -> highest priority.
