@@ -25,14 +25,21 @@ Rails.application.routes.draw do
   resources :staff_page
   get 'home/page'
 
+  #resources :routes do
+   # collection do
+    #  get :leinster
+     # get :munster
+      #get :connacht
+      #get :ulster
+      #get :Leinster2010
+    #end
+  #end
+
   resources :routes do
-    collection do
-      get :leinster
-      get :munster
-      get :connacht
-      get :ulster
-      get :Leinster2010
-    end
+    resources :leinster
+    resources :munster
+    resources :connacht
+    resources :ulster
   end 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
