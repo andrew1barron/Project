@@ -1,12 +1,16 @@
 Rails.application.routes.draw do
 
 
-get '2010', to: 'layouts#2010', as: '2010'
+
   resources :posts do
     resources :replies
   end 
  
   resources :sessions, only: [:new, :create, :destroy]
+
+
+  get '2010', to: 'home#2010', as: '2010'
+  
   get 'signup', to: 'users#new', as: 'signup'
   get 'login', to: 'sessions#new', as: 'login'
   get 'logout', to: 'sessions#destroy', as: 'logout'
