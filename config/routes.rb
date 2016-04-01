@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+
+get '2010', to: 'layouts#2010', as: '2010'
   resources :posts do
     resources :replies
   end 
