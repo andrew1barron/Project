@@ -1,5 +1,9 @@
 <h1>Posts</h1>
+
+<% if current_user != true %>
 <h3>In order to create a post, please log in or sign up!</h3>
+<% end %>
+
 <table>
   <thead>
     <tr>
@@ -23,7 +27,7 @@
         <%= link_to 'Edit', edit_post_path(post) %><% end %>
       </td>
       <td><% if current_user && post.user == current_user %>
-        <%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %><% end %>
+        <%= link_to 'Remove', post, method: :delete, data: { confirm: 'Are you sure?' } %><% end %>
       </td>
     </tr>
     <% end %>
@@ -33,5 +37,6 @@
 <br>
 <% if current_user %> 
 <p><button type="button"><%= link_to 'New Post', new_post_path %></button></p>
-<p><button type="button"><%= link_to 'Home', root_path %></button></p>
 <% end %>
+<p><button type="button"><%= link_to 'Home', root_path %></button></p>
+<!-- <% end %> -->

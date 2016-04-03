@@ -47,6 +47,7 @@
 <% end %>
 
 <!-- the following code allows users to post a reply - functionality and layout for this -->
+<!-- Only displayed in the user is signed in --> 
 <% if current_user %>
   <h2>Add a Reply!</h2>
     <%= form_for([@post, @post.replies.build]) do |f| %>
