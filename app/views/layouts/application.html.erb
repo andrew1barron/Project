@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!-- Overall layout for each page of the app. Comes from application.css stylesheet --> 
 <html>
 <head>
   <title>TestApp</title>
@@ -7,25 +8,30 @@
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
-<body>
-<div id="user_header">
-	<%= link_to 'Home', root_path %> |
-	<%= link_to 'Posts', posts_path %> |
-		<% if current_user %>
-			Logged in as <%= current_user.email %>.
-			<%= link_to "Log Out", logout_path %>
-		<% else %>
-			<%= link_to "Sign Up", signup_path %> or
-			<%= link_to "Log In", login_path %>
+
+	<body>
+		<!-- Nav bar for the app showing links to different pages --> 
+		<div id="user_header">
+			<%= link_to 'Home', root_path %> |
+			<%= link_to 'Posts', posts_path %> |
+				<% if current_user %>
+				<!-- offer log out to current users, if signed in --> 
+					Logged in as <%= current_user.email %>.
+					<%= link_to "Log Out", logout_path %>
+				<% else %>
+				<!-- allow users to sign up or log in -->
+					<%= link_to "Sign Up", signup_path %> or
+					<%= link_to "Log In", login_path %>
+				<% end %>
+		</div> 
+	<!-- end of nav bar --> 
+	<!-- show flash messages to the user --> 
+		<% flash.each do |key, value| %>
+		<%= content_tag(:div, class: "alert alert-#{key}") do %>
+		<p><%= value %></p>
 		<% end %>
-</div> 
+		<% end %>
 
-<% flash.each do |key, value| %>
-<%= content_tag(:div, class: "alert alert-#{key}") do %>
-<p><%= value %></p>
-<% end %>
-<% end %>
-
-<%= yield %>
-</body>
+		<%= yield %>
+	</body>
 </html>

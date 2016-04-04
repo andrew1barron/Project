@@ -1,3 +1,6 @@
+<!-- html used for form to create a new post -->
+<!-- embedded with ruby to take in content, user name and user id -->
+
 <%= form_for(@post) do |f| %>
   <% if @post.errors.any? %>
     <div id="error_explanation">

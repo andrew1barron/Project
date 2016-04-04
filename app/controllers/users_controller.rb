@@ -1,7 +1,8 @@
 class UsersController < ApplicationController
+  # Allows a user to sign up to the system 
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
-  # GET /users
+  # GET /users - displays all users. This page is hidden from users 
   def index
     @users = User.all
   end
@@ -10,7 +11,7 @@ class UsersController < ApplicationController
   def show
   end
 
-  # GET /users/new
+  # GET /users/new - shows the new user page and form
   def new
     @user = User.new
   end
@@ -19,7 +20,7 @@ class UsersController < ApplicationController
   def edit
   end
 
-  # POST /users
+  # POST /users - this is the method that creates a new user and signs them in 
   def create
     @user = User.new(user_params)
 
@@ -31,7 +32,7 @@ class UsersController < ApplicationController
     end
   end
 
-  # PATCH/PUT /users/1
+  # PATCH/PUT /users/1 - updates a user account. Not used in system yet. 
   def update
     if @user.update(user_params)
       redirect_to @user, notice: 'User was successfully updated.'
@@ -40,7 +41,7 @@ class UsersController < ApplicationController
     end
   end
 
-  # DELETE /users/1
+  # DELETE /users/1 - deletes a user from the system. Not used in system yet
   def destroy
     @user.destroy
     redirect_to users_url, notice: 'User was successfully destroyed.'
@@ -52,7 +53,7 @@ class UsersController < ApplicationController
       @user = User.find(params[:id])
     end
 
-    # Only allow a trusted parameter "white list" through.
+    # Only allow a trusted parameter "white list" through. parameters entered when signing up 
     def user_params
       params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation)
     end

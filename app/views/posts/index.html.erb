@@ -1,27 +1,33 @@
+<!-- html.erb file for showing all posts on them app --> 
+<!-- Checks included to allow post owners to edit or remove posts they own --> 
 <h1>Posts</h1>
-
+<!-- display message to non signed in users --> 
 <% if current_user != true %>
   <h3>In order to create a post, please log in or sign up!</h3>
 <% end %>
 
+<!-- start of table -->
 <table>
-  <thead>
+  <thead>  
     <tr>
+      <!-- column titles -->
       <th>User</th>
       <th>Title</th>
       <th>Content</th>
       <th colspan="3"></th>
     </tr>
   </thead>
-
-  <tbody>
+  <!-- table content -->
+  <tbody> 
     <% @posts.each do |post| %>
     <tr>
-      <td><%= post.user %></td>
-      <td><%= post.title %></td>
-      <td><%= post.content %></td>
+      <td><%= post.user %></td> <!-- show user -->
+      <td><%= post.title %></td> <!-- show title --> 
+      <td><%= post.content %></td> <!-- show content --> 
+
       <!-- any user can view a post, signed in or not -->
       <td><%= link_to 'Show', post %></td> 
+
       <!-- following if-statements allow a signed in user to edit or delete posts they have made -->
       <td><% if current_user && post.user == current_user %>
         <%= link_to 'Edit', edit_post_path(post) %><% end %>
@@ -32,10 +38,13 @@
     </tr>
     <% end %>
   </tbody>
+  <!-- end of table content --> 
 </table>
+<!-- end of table -->
 <br>
 <br>
-<% if current_user %> 
+<% if current_user %> <!-- allow signed in user to create new post --> 
   <p><button type="button"><%= link_to 'New Post', new_post_path %></button></p>
 <% end %>
+<!-- link back to home page --> 
 <p><button type="button"><%= link_to 'Home', root_path %></button></p>
