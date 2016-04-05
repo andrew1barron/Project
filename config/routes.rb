@@ -32,6 +32,7 @@ Rails.application.routes.draw do
       get :connacht
       get :ulster
       get 'Leinster2010', to: 'routes#Leinster2010', as: 'L2010'
+      get 'Munster2015', to: 'routes#Munster2015', as: 'M2015'
     end
   end
 
