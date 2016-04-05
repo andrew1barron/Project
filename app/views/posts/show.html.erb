@@ -13,7 +13,7 @@
   <%= @post.content %>
 </p>
 
-<% if current_user == false %>
+<% if current_user !== true %>
   <h2>Please sign in to comment!</h2>
 <% end %>
 
