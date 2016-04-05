@@ -1,3 +1,5 @@
+<!-- this is form a new user must fill in when signing up to the system --> 
+<!-- below is the error message that is displayed if a user fails to be created -->
 <%= form_for(@user) do |f| %>
   <% if @user.errors.any? %>
     <div id="error_explanation">
@@ -10,7 +12,7 @@
       </ul>
     </div>
   <% end %>
-
+<!-- information that is taken in -->
   <div class="field">
     <%= f.label :first_name %><br>
     <%= f.text_field :first_name %>

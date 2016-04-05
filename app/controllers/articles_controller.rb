@@ -1,4 +1,5 @@
 class ArticlesController < ApplicationController
+  # not used anymore - original version of posts 
   http_basic_authenticate_with name: "test", password: "password", except: [:index, :show]
   
     

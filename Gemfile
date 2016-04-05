@@ -1,12 +1,20 @@
 source 'https://rubygems.org'
 
+# This is the gemfile for the system
+# it details the gems used for the app and also the database used 
+
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
+# version of rails used 
 gem 'rails', '4.2.5'
-# Use sqlite3 as the database for Active Record
+
+# database details 
+# Use sqlite3 as the database for Active Record. This was the original database used 
 # gem 'sqlite3'
-# Use PostGre as the database for Active Record
+
+# Use PostGre as the database for Active Record. Switched to this when deployed with heroku 
 gem 'pg' 
+
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
@@ -25,7 +33,7 @@ gem 'turbolinks'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 
-# Use ActiveModel has_secure_password
+# Use ActiveModel has_secure_password. Used for user accounts to show passwords are encrypted 
 gem 'bcrypt', '~> 3.1.7'
 
 # Use Unicorn as the app server

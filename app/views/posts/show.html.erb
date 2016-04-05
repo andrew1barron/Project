@@ -1,3 +1,5 @@
+<!-- Page that displays a post and its associated comments -->
+<!-- show post user, title and post content -->
 <p>
   <strong>User:</strong>
   <%= @post.user %>
@@ -13,57 +15,56 @@
   <%= @post.content %>
 </p>
 
+<!-- display message to non-signed in user -->
 <% if current_user != true %>
   <h2>Please sign in to comment!</h2>
 <% end %>
 
+<!-- show replies to the post - replier and reply content -->
 <h2>Replies</h2>
   <% @post.replies.each do |reply| %>
   <tr>
     <td>
       <strong>Commenter:</strong>
-        <%= reply.commenter %> 
+        <%= reply.commenter %> <!--show replier -->
     </td>
     <td>
       <strong>Comment:</strong>
-      <%= reply.body %>
+      <%= reply.body %> <!-- show reply content --> 
     </td>
     <br>
     <!-- above is the layout for the page - post and related comments. -->
-    <!-- If statement below allows the owner of the post to delete any comments on the post -->
-    <!-- need to change to also allow the commenter the option of deleting their comment on a post -->
     <td>
       <% if current_user %>
-      <% if current_user == @post.user %>
-        <%= link_to 'Remove Comment', [reply.post, reply], method: :delete, data: { confirm: 'Are you sure?'} %>
-      <% end %> 
-      <% if current_user ==  reply.user %> 
-        <%= link_to 'Remove Comment', [reply.post, reply], method: :delete, data: { confirm: 'Are you sure?'} %>
-      <% end %> 
+        <% if current_user == @post.user %> <!-- allows the owner of the post to delete any comments on their post -->
+          <%= link_to 'Remove Comment', [reply.post, reply], method: :delete, data: { confirm: 'Are you sure?'} %>
+        <% end %> 
+        <% if current_user ==  reply.user %> <!-- allow reply owner to remove reply -->
+          <%= link_to 'Remove Comment', [reply.post, reply], method: :delete, data: { confirm: 'Are you sure?'} %>
+        <% end %> 
     </td>
     <br>
   </tr>
-<% end %>
+  <% end %>
 <% end %>
 
 <!-- the following code allows users to post a reply - functionality and layout for this -->
-<!-- Only displayed in the user is signed in --> 
-<% if current_user %>
+<% if current_user %> <!-- Only displayed in the user is signed in --> 
   <h2>Add a Reply!</h2>
-    <%= form_for([@post, @post.replies.build]) do |f| %>
+    <%= form_for([@post, @post.replies.build]) do |f| %> <!-- builds form -->
     <%= f.hidden_field(:user_id, :value => current_user.id) %> 
     <!-- this takes in the user_id of the person writing the reply --> 
     <p>
       <p>
         <%= f.label :commenter %>
         <br>
-        <%= f.text_field :commenter, :placeholder => "Name" %>
+        <%= f.text_field :commenter, :placeholder => "Name" %> <!-- name taken in -->
         <br> 
       </p>
       <p>
         <%= f.label :body %>
         <br>
-        <%= f.text_area :body, :placeholder => "Comment" %>
+        <%= f.text_area :body, :placeholder => "Comment" %> <!-- content taken in --> 
       </p>
     <p>
       <%= f.submit %>
@@ -72,6 +73,7 @@
 <% end %>
 
 
-
+<!-- links to edit a post and back to posts index --> 
+<!-- if non signed in user tries to access edit it will bring them to log in page --> 
 <%= link_to 'Edit', edit_post_path(@post) %> |
 <%= link_to 'Back', posts_path %>

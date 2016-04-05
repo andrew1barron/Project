@@ -1,4 +1,5 @@
 class CommentsController < ApplicationController
+  # not used anymore - orginal version of replies 
   http_basic_authenticate_with name: "dhh", password: "secret", only: :destroy 
   http_basic_authenticate_with name: "dhh", password: "secret", only: :create 
   #&& :create
