@@ -74,10 +74,18 @@
 <% end %>
 <br>
 <br>
-
 <!-- links to edit a post and back to posts index --> 
 <!-- if non signed in user tries to access edit it will bring them to log in page --> 
-<% if current_user = @post.user %>
-<%= link_to 'Edit', edit_post_path(@post) %>
-<% end %> 
+<% if current_user %>
+  <% if current_user = @post.user %>
+    <%= link_to 'Edit', edit_post_path(@post) %>
+  <% end %> 
+<% end %>
 | <%= link_to 'Back', posts_path %>
+
+
+
+
+
+
+
