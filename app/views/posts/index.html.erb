@@ -2,7 +2,7 @@
 <!-- Checks included to allow post owners to edit or remove posts they own --> 
 <h1>Posts</h1>
 <!-- display message to non signed in users --> 
-<% if current_user != true %>
+<% if current_user == nil %>
   <h3>In order to create a post, please log in or sign up!</h3>
 <% end %>
 
